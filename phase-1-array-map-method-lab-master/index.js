@@ -1,4 +1,9 @@
-
+const tutorials = [
+  "javascript fundamentals",
+  "react hooks",
+  "python flask",
+  "sql basics"
+];
 
 const titleCased = () => {
   return tutorials.map(title => {
@@ -16,7 +21,6 @@ const titleCased = () => {
 };
 
 console.log(titleCased());
-
 
 
 //Pseudocode, we use the map() method to iterate through each tutorial title. Inside the map() callback function, we split the title into an array of words using split(" "). Then, we use another map() method to iterate through each word and capitalize the first letter using charAt(0).toUpperCase() + word.slice(1). Finally, we join the capitalized words back into a title using join(" ").
