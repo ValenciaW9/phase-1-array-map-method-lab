@@ -2,15 +2,15 @@ function titleCased() {
   const capitalizedTitles = tutorials.map(title => {
     const words = title.split(" ");
     const capitalizedWords = words.map(word => {
-      // Capitalize the first letter of each word
-      // Hint: You can use the `charAt()` and `toUpperCase()` methods
+      return word.charAt(0).toUpperCase() + word.slice(1);
     });
-    // Join the modified words back together
-    // Hint: You can use the `join()` method
+    return capitalizedWords.join(" ");
   });
   return capitalizedTitles;
 }
 
+const result = titleCased();
+console.log(result);
 
 
 //// Lab: Using map() to Generate a New ArrayLet's put our newly acquired knowledge of map() to use! We just uploaded 10 coding tutorials online, but some of them have inconsistent casing. We want all the titles to be "title case", in other words, the first letter of each word should be capitalized. Create a new array containing the names of the tutorials with proper title case formatting. For example, 'what does the this keyword mean?' should become 'What Does The This Keyword Mean?'.
