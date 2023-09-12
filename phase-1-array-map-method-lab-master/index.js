@@ -1,31 +1,47 @@
-const tutorials = [
-  "javascript fundamentals",
-  "react hooks",
-  "python flask",
-  "sql basics"
-];
+[
+  "Javascript Fundamentals",
+  "React Hooks",
+  "Python Flask",
+  "Sql Basics"
+]
+[
+  "What Does The This Keyword Mean?",
+  "What Is The Constructor OO Pattern?",
+  "Implementing Blockchain Web API",
+  "The Test Driven Development Workflow",
+  "What Is NaN And How Can We Check For It?",
+  "What Is The Difference Between StopPropagation And PreventDefault?",
+  "Immutable State And Pure Functions",
+  "What Is The Difference Between == And ===?",
+  "What Is The Difference Between Event Capturing And Bubbling?",
+  "What Is JSONP?"
+]
 
-const titleCased = () => {
-  return tutorials.map(title => {
-    // Split the title into an array of words
-    const words = title.split(" ");
 
-    // Capitalize the first letter of each word
-    const capitalizedWords = words.map(word => {
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    });
-
-    // Join the capitalized words back into a title
-    return capitalizedWords.join(" ");
-  });
-};
-
-console.log(titleCased());
 
 
 //Pseudocode, we use the map() method to iterate through each tutorial title. Inside the map() callback function, we split the title into an array of words using split(" "). Then, we use another map() method to iterate through each word and capitalize the first letter using charAt(0).toUpperCase() + word.slice(1). Finally, we join the capitalized words back into a title using join(" ").
 
+//Define an array called tutorials with the given tutorial names.
 
+ //Define a function called titleCased:
+   //Initialize an empty array called capitalizedTitles.
+
+   //Iterate over each title in the tutorials array:
+     //Split the title into an array of words.
+
+     //Iterate over each word in the array of words:
+       //Capitalize the first letter of the word and concatenate it with the rest of the word.
+
+     //Join the array of words back into a single string.
+
+     //Add the capitalized title to the capitalizedTitles array.
+
+   //Return the capitalizedTitles array.
+
+//Call the titleCased function and store the result in a variable called result.
+
+//Print the result variable to the console.
 
 
 //// Lab: Using map() to Generate a New ArrayLet's put our newly acquired knowledge of map() to use! We just uploaded 10 coding tutorials online, but some of them have inconsistent casing. We want all the titles to be "title case", in other words, the first letter of each word should be capitalized. Create a new array containing the names of the tutorials with proper title case formatting. For example, 'what does the this keyword mean?' should become 'What Does The This Keyword Mean?'.
