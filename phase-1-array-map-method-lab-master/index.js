@@ -1,27 +1,25 @@
-onst tutorials = [
+const titleCased = [
   "Javascript Fundamentals",
   "React Hooks",
   "Python Flask",
   "Sql Basics"
 ];
-Define a function called titleCased:
+
 function titleCased() {
-  // Implementation goes here
+  // Implementation goes hereInitialize
 }
-Initialize an empty array called capitalizedTitles inside the titleCased function.
+ 
 function titleCased() {
   const capitalizedTitles = [];
   // Implementation goes here
 }
-Iterate over each title in the tutorials array using the map() method. Inside the map() callback function, split the title into an array of words using split(" ").
-function titleCased() {
+
   const capitalizedTitles = tutorials.map(title => {
     const words = title.split(" ");
     // Implementation goes here
   });
   // Implementation goes here
-}
-Iterate over each word in the words array using the map() method. Inside the map() callback function, capitalize the first letter of the word using charAt(0).toUpperCase() + word.slice(1).
+
 function titleCased() {
   const capitalizedTitles = tutorials.map(title => {
     const words = title.split(" ");
@@ -32,7 +30,7 @@ function titleCased() {
   });
   // Implementation goes here
 }
-Join the array of words back into a single string using join(" ").
+
 function titleCased() {
   const capitalizedTitles = tutorials.map(title => {
     const words = title.split(" ");
@@ -44,7 +42,6 @@ function titleCased() {
   });
   // Implementation goes here
 }
-Add the capitalizedTitle to the capitalizedTitles array.
 function titleCased() {
   const capitalizedTitles = tutorials.map(title => {
     const words = title.split(" ");
@@ -113,5 +110,5 @@ function titleCased() {
 //Install the dependencies using npm install.
 /////Run the tests using npm test.
 //Read the errors; vocalize what they're asking you to do. //Pseudocode
-//Write code; repeat steps 2 and 3 often until a test passes.
-//Repeat as needed for the remaining tests.
+};
+
