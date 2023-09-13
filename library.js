@@ -704,18 +704,6 @@ function forOf(iterable, entries, fn, that){
 }();
 
 /******************************************************************************
- * Module : es6.object.prototype                                              *
- ******************************************************************************/
-
-!function(tmp){
-  // 19.1.3.6 Object.prototype.toString()
-  tmp[SYMBOL_TAG] = DOT;
-  if(cof(tmp) != DOT)hidden(ObjectProto, TO_STRING, function(){
-    return '[object ' + classof(this) + ']';
-  });
-}({});
-
-/******************************************************************************
  * Module : es6.object.statics-accept-primitives                              *
  ******************************************************************************/
 
@@ -754,59 +742,6 @@ function forOf(iterable, entries, fn, that){
   wrapObjectMethod('keys');
   wrapObjectMethod('getOwnPropertyNames');
 }();
-
-/******************************************************************************
- * Module : es6.function                                                      *
- ******************************************************************************/
-
-!function(NAME){
-  // 19.2.4.2 name
-  NAME in FunctionProto || (DESC && defineProperty(FunctionProto, NAME, {
-    configurable: true,
-    get: function(){
-      var match = String(this).match(/^\s*function ([^ (]*)/)
-        , name  = match ? match[1] : '';
-      has(this, NAME) || defineProperty(this, NAME, descriptor(5, name));
-      return name;
-    },
-    set: function(value){
-      has(this, NAME) || defineProperty(this, NAME, descriptor(0, value));
-    }
-  }));
-}('name');
-
-/******************************************************************************
- * Module : es6.number.constructor                                            *
- ******************************************************************************/
-
-Number('0o1') && Number('0b1') || function(_Number, NumberProto){
-  function toNumber(it){
-    if(isObject(it))it = toPrimitive(it);
-    if(typeof it == 'string' && it.length > 2 && it.charCodeAt(0) == 48){
-      var binary = false;
-      switch(it.charCodeAt(1)){
-        case 66 : case 98  : binary = true;
-        case 79 : case 111 : return parseInt(it.slice(2), binary ? 2 : 8);
-      }
-    } return +it;
-  }
-  function toPrimitive(it){
-    var fn, val;
-    if(isFunction(fn = it.valueOf) && !isObject(val = fn.call(it)))return val;
-    if(isFunction(fn = it[TO_STRING]) && !isObject(val = fn.call(it)))return val;
-    throw TypeError("Can't convert object to number");
-  }
-  Number = function Number(it){
-    return this instanceof Number ? new _Number(toNumber(it)) : toNumber(it);
-  }
-  forEach.call(DESC ? getNames(_Number)
-  : array('MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY'), function(key){
-    key in Number || defineProperty(Number, key, getOwnDescriptor(_Number, key));
-  });
-  Number[PROTOTYPE] = NumberProto;
-  NumberProto[CONSTRUCTOR] = Number;
-  hidden(global, NUMBER, Number);
-}(Number, Number[PROTOTYPE]);
 
 /******************************************************************************
  * Module : es6.number.statics                                                *
@@ -1172,38 +1107,6 @@ Number('0o1') && Number('0b1') || function(_Number, NumberProto){
     return iterResult(0, point);
   });
 }(createPointAt(true));
-
-/******************************************************************************
- * Module : es6.regexp                                                        *
- ******************************************************************************/
-
-DESC && !function(RegExpProto, _RegExp){  
-  // RegExp allows a regex with flags as the pattern
-  if(!function(){try{return RegExp(/a/g, 'i') == '/a/i'}catch(e){}}()){
-    RegExp = function RegExp(pattern, flags){
-      return new _RegExp(cof(pattern) == REGEXP && flags !== undefined
-        ? pattern.source : pattern, flags);
-    }
-    forEach.call(getNames(_RegExp), function(key){
-      key in RegExp || defineProperty(RegExp, key, {
-        configurable: true,
-        get: function(){ return _RegExp[key] },
-        set: function(it){ _RegExp[key] = it }
-      });
-    });
-    RegExpProto[CONSTRUCTOR] = RegExp;
-    RegExp[PROTOTYPE] = RegExpProto;
-    hidden(global, REGEXP, RegExp);
-  }
-  
-  // 21.2.5.3 get RegExp.prototype.flags()
-  if(/./g.flags != 'g')defineProperty(RegExpProto, 'flags', {
-    configurable: true,
-    get: createReplacer(/^.*\/(\w*)$/, '$1')
-  });
-  
-  setSpecies(RegExp);
-}(RegExp[PROTOTYPE], RegExp);
 
 /******************************************************************************
  * Module : web.immediate                                                     *
@@ -2433,4 +2336,4 @@ $define(GLOBAL + FORCED, {global: global});
     }
   })});
 }({}, true);
-}(typeof self != 'undefined' && self.Math === Math ? self : Function('return this')(), true);
+}(typeof self != 'undefined' && self.Math === Math ? self : Function('return this')(), false);
